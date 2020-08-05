@@ -28,19 +28,79 @@ const students = [
   },
 ];
 
-// function#1
-const getSubjects = (stud) => {
-  let studSubjects = Object.keys(stud.subjects);
-  studSubjects.forEach((name) => {
-    name = name.toLowerCase(name);
-    let name1 = name.slice(0, 1).toUpperCase();
-    name = name.slice(1, name.length);
-    //console.log(name1 + name);
-    let re = new RegExp(`_`, `g`);
-    name = name.replace(re, ` `);
-    console.log(name1 + name);
+// // function#1
+// const getSubjects = (stud) => {
+//   let subjects = [];
+//   let studSubjects = Object.keys(stud.subjects);
+//   studSubjects.forEach((subj) => {
+//     subj = subj.toLowerCase(subj);
+//     let subjFirstLetter = subj.slice(0, 1).toUpperCase();
+//     subj = subj.slice(1, subj.length);
+
+//     const re = new RegExp(`_`, `g`);
+//     subj = subj.replace(re, ` `);
+//     const subjectName = subjFirstLetter + subj;
+//     subjects.push(subjectName);
+//   });
+
+//   return subjects;
+// };
+// console.log(`Student"s subjects are:`, getSubjects(students[0]));
+
+// function#2
+const getAverageMark = (stud) => {
+  let averSum = 0;
+  let studSubjects = Object.values(stud.subjects);
+  studSubjects = studSubjects.flat();
+
+  studSubjects.reduce(function (accumulator, currentValue) {
+    return (sum = accumulator + currentValue);
   });
-  //studSubjects = studSubjects.toUpperCase[0];
-  return studSubjects;
+  averSum = (sum / studSubjects.length).toFixed(2);
+  return averSum;
 };
-console.log(getSubjects(students[2]));
+console.log(`Average mark of all subjects is:`, getAverageMark(students[0]));
+
+// // function#3
+// const getStudentInfo = (stud) => {
+//   const { course, name } = stud;
+//   const someStudInfo = {
+//     course,
+//     name,
+//   };
+//   const averageMark = getAverageMark(stud);
+
+//   const studInfo = {
+//     ...someStudInfo,
+//     averageMark,
+//   };
+//   return studInfo;
+// };
+// console.log(getStudentInfo(students[0]));
+
+// // function#4
+// const getStudentsNames = (students) => {
+//   studNames = [];
+//   students.forEach((stud) => {
+//     studNames.push(stud.name);
+//   });
+//     return studNames.sort();
+// };
+// console.log(getStudentsNames(students));
+
+// function#5
+const getBestStudent = (students) => {
+  let studInfo = {};
+  students.forEach((stud) => {
+    averageMark = Number(getAverageMark(stud));
+    const { name } = stud;
+    studInfo = {
+      name,
+      averageMark,
+    };
+    console.log(studInfo);
+  });
+  Math.max(averageMark);
+  return studInfo.name;
+};
+console.log(getBestStudent(students));
